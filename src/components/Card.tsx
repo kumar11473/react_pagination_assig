@@ -60,29 +60,3 @@ const Card: React.FC<ProductCardProps> = ({product}) => {
 
 export default Card;
 
-
-/*
-
-// interface ProductCardProps {
-//   product: {
-//     images: string[];
-//     title: string;
-//     description: string;
-//     price: number;
-//     discountPercentage: number;
-//     rating: number;
-//     brand: string;
-//   };
-// //   favIconClass?: string;
-// //   favIconStyle?: React.CSSProperties;
-// }
-// const product ={
-//     image:'asdfa',
-//     title:'sfasd',
-//     description:'sdfd',
-//     price:222,
-//     rating:4,
-//     brand:'sun'
-// }
-
-*/
