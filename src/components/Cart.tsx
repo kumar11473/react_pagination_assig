@@ -59,15 +59,18 @@ const Cart: React.FC<PropType> = ({ favStatus, setFavStatus }) => {
       </button>
 
       <h1 className="text-2xl font-bold mb-4">Your Cart Items</h1>
+      <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6'>
+
       {Data.map((product) => (
         <Card
-          favStatus={favStatus}
-          setFavStatus={setFavStatus}
-          key={product.id}
-          product={product}
-          
+        favStatus={favStatus}
+        setFavStatus={setFavStatus}
+        key={product.id}
+        product={product}
+        
         />
       ))}
+      </div>
 
       <div className="flex justify-between mt-4 pt-4 border-t">
         <span className="font-bold">Total Value:</span>

@@ -21,7 +21,8 @@ function App({favStatus,setFavStatus}:PropType) {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [offset,setOffset] = useState<number>(10)
   const [totalPages,setTotalpages] = useState<number>(10)
-  let [Data,setData] =useState<Array<ProductType>>([])
+
+  let [Data,setData] =useState<ProductType[]>([])
 
   // const [favStatus,setFavStatus] = useState<boolean>(false)
 
@@ -31,14 +32,23 @@ function App({favStatus,setFavStatus}:PropType) {
   console.log('app.tsx re-render')
   return (
     <div className="App">
-      <Navbar/>
+      <Navbar
+      Data={Data}
+      setData={setData}
+      favStatus={favStatus}
+      setFavStatus={setFavStatus}
+      />
       <MainContainer  
+       Data={Data}
+       setData={setData}
         favStatus={favStatus}
         setFavStatus={setFavStatus}
         CACHE={CACHE}
         currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
         offset={offset}
         totalPages={totalPages}
+        
       />
 
     <Pagination 
