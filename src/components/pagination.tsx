@@ -1,13 +1,25 @@
 import React, { useState } from 'react';
 
-const PaginationComponent: React.FC = () => {
-  const [currentPage, setCurrentPage] = useState(1);
-  const totalPages = 10;
+interface PropType {
+  currentPage:number,
+  setCurrentPage:(arg:number)=>void,
+  setOffset:(arg:number)=>void
+}
+
+const PaginationComponent: React.FC<PropType> = ({currentPage, setCurrentPage,setOffset}) => {
+  // const [currentPage, setCurrentPage] = useState<number>(1);
+  // const [offset,setOffset] = useState<number>(10)
+  const [totalPages,setTotalpages] = useState<number>(10)
+  
+  let pages:number[]=[]
+  for(let i = 1;i<=Math.ceil(totalPages);i++) pages.push(i)
 
   const handleNext = () => {
     if (currentPage < totalPages) {
       setCurrentPage(currentPage + 1);
+      
     }
+    // console.log(currentPage)
   };
 
   const handlePrevious = () => {
@@ -15,10 +27,14 @@ const PaginationComponent: React.FC = () => {
       setCurrentPage(currentPage - 1);
     }
   };
+  const handleOffset : React.ChangeEventHandler<HTMLSelectElement> = (e)=>{
+    // console.log(e.target.value)
+    setOffset(parseInt(e.target.value))
+  }
 
-  const handlePageClick = (page: number) => {
-    setCurrentPage(page);
-  };
+  // const handlePageClick:React.MouseEventHandler<HTMLButtonElement>  = (page) => {
+  //   setCurrentPage(page);
+  // };
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -31,36 +47,14 @@ const PaginationComponent: React.FC = () => {
           disabled={currentPage === 1}
           className="mx-2 px-4 py-2 bg-blue-500 hover:bg-blue-700 text-white font-bold rounded disabled:bg-gray-500"
         >
-          Previous
+          {'<'}
         </button>
         <ul className="flex space-x-2 mx-2">
-          
-            <li key={1}>
-              <a href="#" onClick={() => handlePageClick( 1)}
-                className={`page-number ${currentPage ===  1 ? 'font-bold' : ''}`}
-              >{ 1}</a>
-            </li>
-            <li key={2}>
-              <a href="#" onClick={() => handlePageClick( 1)}
-                className={`page-number ${currentPage ===  1 ? 'font-bold' : ''}`}
-              >{ 1}</a>
-            </li>
-            <li key={1}>
-              <a href="#" onClick={() => handlePageClick( 1)}
-                className={`page-number ${currentPage ===  1 ? 'bg-blue-700' : ''}`}
-              >{ 1}</a>
-            </li>
-            <li key={1}>
-              <a href="#" onClick={() => handlePageClick( 1)}
-                className={`page-number ${currentPage ===  1 ? 'font-bold' : ''}`}
-              >{ 1}</a>
-            </li>
-            <li key={1}>
-              <a href="#" onClick={() => handlePageClick( 1)}
-                className={`page-number ${currentPage ===  1 ? 'font-bold' : ''}`}
-              >{ 1}</a>
-            </li>
-
+        {
+          pages.map((page,index)=>{
+            return <button key={index} onClick={(e)=>setCurrentPage(page)} className= {` ${currentPage===page ? 'bg-blue-800': 'bg-white' } text-black p-1 rounded-md `} >{page}</button>
+          })
+        }
           
         </ul>
         <button
@@ -68,9 +62,21 @@ const PaginationComponent: React.FC = () => {
           disabled={currentPage === totalPages}
           className="mx-2 px-4 py-2 bg-blue-500 hover:bg-blue-700 text-white font-bold rounded disabled:bg-gray-500"
         >
-          Next
+          {'>'}
         </button>
+
+
+        <div className="dropdown-container ">
+        <label htmlFor="offset-dropdown " className="mr-2">Select Offset :</label>
+        <select onChange={handleOffset} className="offset-dropdown p-2 border rounded bg-inherit text-red-600 outline-none">
+          <option value="10">10</option>
+          <option value="15">15</option>
+          <option value="20">20</option>
+          <option value="25">25</option>
+        </select>
+      </div>
       </footer>
+
     </div>
   );
 };

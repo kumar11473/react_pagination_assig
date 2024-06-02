@@ -1,11 +1,13 @@
 import React, { MouseEventHandler, useState } from 'react';
 import { FaShoppingCart } from 'react-icons/fa';
 import { IoSearch } from 'react-icons/io5';
+import { useNavigate } from 'react-router-dom';
 
 const Navbar: React.FC = () => {
 
   const [query,setQuery] =useState<string>()
   const [order,setOrder] =useState<string>()
+  const navigate = useNavigate();
 
   const handleClick :React.MouseEventHandler<HTMLButtonElement> = (e):void=>{
     console.log(e)
@@ -16,9 +18,10 @@ const Navbar: React.FC = () => {
     console.log('changed order')
     // console.log(e.target.value)
     setOrder(e.target.value)
+
   }
   const handleCart = ()=>{
-    
+    navigate('/cart')
   }
 
   return (
@@ -39,7 +42,7 @@ const Navbar: React.FC = () => {
           </button>
         </div>
 
-        <div onClick={handleCart} className="fav-icon-container text-3xl text-white">
+        <div onClick={handleCart} className="fav-icon-container text-3xl text-white cursor-pointer">
           <FaShoppingCart />
         </div>
 

@@ -8,12 +8,13 @@ import { FaHeart } from "react-icons/fa";
 
 
 interface ProductCardProps {
+    favStatus:boolean,
+    setFavStatus:React.Dispatch<React.SetStateAction<boolean>>,
     product:  ProductType
 }
 
-const Card: React.FC<ProductCardProps> = ({product}) => {
-    // console.log(product)
-    const [favStatus,setFavStatus] = useState<boolean>(false)
+const Card: React.FC<ProductCardProps> = ({favStatus,setFavStatus,product}) => {
+    
 
     const addToFav = ()=>{
       let localStorage :string | null = window.localStorage.getItem("fav")
@@ -46,13 +47,12 @@ const Card: React.FC<ProductCardProps> = ({product}) => {
         <p className="text-yellow-500 mb-2">Rating: {product.rating}</p>
         <p className="text-gray-700">Brand: {product.brand}</p>
       </div>
-      <div  className=" flex justify-center text-lg ">
-        <span onClick={addToFav} className='cursor-pointer'>
+      <div  className="flex justify-center text-lg ">
+        <span onClick={addToFav} className='fav-icon cursor-pointer'>
       {
-        window.localStorage.getItem('fav')?.includes(product.id.toString())? <FaHeart style={{color: 'red'}} />: <FaRegHeart />
+        window.localStorage.getItem('fav')?.includes(product.id.toString())? <FaHeart  style={{color: 'red'}} />: <FaRegHeart />
       }
       </span>
-     
       </div>
     </div>
   );
