@@ -3,16 +3,17 @@ import React, { useState } from 'react';
 interface PropType {
   currentPage:number,
   setCurrentPage:(arg:number)=>void,
+  offset:number,
   setOffset:(arg:number)=>void
 }
 
-const PaginationComponent: React.FC<PropType> = ({currentPage, setCurrentPage,setOffset}) => {
+const PaginationComponent: React.FC<PropType> = ({currentPage, setCurrentPage,offset,setOffset}) => {
   // const [currentPage, setCurrentPage] = useState<number>(1);
   // const [offset,setOffset] = useState<number>(10)
-  const [totalPages,setTotalpages] = useState<number>(10)
+  const [totalPages,setTotalpages] = useState<number>((Math.ceil(194/10)))
   
   let pages:number[]=[]
-  for(let i = 1;i<=Math.ceil(totalPages);i++) pages.push(i)
+  for(let i = 1;i<=(totalPages);i++) pages.push(i)
 
   const handleNext = () => {
     if (currentPage < totalPages) {
@@ -30,6 +31,7 @@ const PaginationComponent: React.FC<PropType> = ({currentPage, setCurrentPage,se
   const handleOffset : React.ChangeEventHandler<HTMLSelectElement> = (e)=>{
     // console.log(e.target.value)
     setOffset(parseInt(e.target.value))
+    setTotalpages(Math.ceil(194/parseInt(e.target.value)))
   }
 
   // const handlePageClick:React.MouseEventHandler<HTMLButtonElement>  = (page) => {

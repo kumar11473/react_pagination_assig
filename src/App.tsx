@@ -54,6 +54,7 @@ function App({favStatus,setFavStatus}:PropType) {
     <Pagination 
       currentPage={currentPage}
       setCurrentPage = {setCurrentPage}
+      offset={offset}
       setOffset = {setOffset}
     />
     </div>
